@@ -3,7 +3,8 @@
 注意事项:
 
 1. node_modules的依赖项特别多,注意,我自己的文件路径有完整的node_modules文件`F:\front.end\end\panda.ming\vue\vue.cms.panda` 
-2. 待补充
+2. 数据库在PHPstudy中的MySQL数据库,还需启动node后台服务,提供后台接口数据,启动node:`F:\front.end\end\panda.ming\vue\vue数据库资源\vuecms3_nodejsapi\src` --->`node app.js` 
+3. ​
 
 ## 项目基本框架的搭建
 
