@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="pic">
         <div id="slider" class="mui-slider">
             <div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
                 <div class="mui-scroll">
@@ -17,7 +17,17 @@
         </div>
 
         <div class="pic-list">
-            <img v-for="(item, index) in pictures" :key="index" :src="picUrl + item.img_url" alt="">
+            <ul>
+                <li v-for="(item, index) in pictures" :key="index">
+                    <router-link :to="'/pic/detail/' + item.id">
+                        <img v-lazy="picUrl + item.img_url">  
+                        <div>
+                            <p>{{item.title}}</p>
+                            <p>{{item.zhaiyao}}</p>
+                        </div>
+                    </router-link>
+                </li>
+            </ul>
         </div>
     </div>
 </template>
@@ -49,7 +59,7 @@ export default {
         return {
             categories: [],
             pictures: [],
-            picUrl: "http://ofv795nmp.bkt.clouddn.com/"
+            picUrl: config.picUrl
         }
     },
     mounted(){
@@ -78,7 +88,7 @@ export default {
             this.$http.get(config.apiUrl + "/api/getimages/" + this.$route.params.id).then(function(res){
                 var data = res.body;
                 if(data.status == 0){
-                    // console.log(data);
+                    console.log(data);
                     this.pictures = data.message;
                 }
             })
@@ -97,4 +107,45 @@ export default {
 
 <style>
 
+#slider{
+    background-color: #fff;
+    
+}
+.pic{
+}
+
+.pic-list ul{
+    padding: 0 10px;
+}
+.pic-list li{
+    list-style: none;
+    background-color: #ccc;
+    margin-bottom:10px;
+    box-shadow: 0 0 15px #999;
+    position: relative;
+}
+
+.pic-list li div{
+    position: absolute;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .4);
+}
+
+.pic-list li div p{
+    color: #fff;
+}
+
+
+
+img[lazy=loaded]{
+    width: 100%;
+    display: block;
+}
+
+img[lazy=loading] {
+  width: 40px;
+  height: 300px;
+  margin: auto;
+  display: block;
+}
 </style>

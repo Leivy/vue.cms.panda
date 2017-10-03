@@ -20,6 +20,11 @@ import NewsDetail from "../components/news/detail.vue"
 import PicList from "../components/picture/list.vue"
 import PicDetail from "../components/picture/detail.vue"
 
+import GoodsList from "../components/product/list.vue"
+import GoodsDetail from "../components/product/detail.vue"
+import GoodsDesc from "../components/product/desc.vue"
+import GoodsComment from "../components/product/comment.vue"
+
 
 export default new VueRouter({
     routes: [
@@ -27,11 +32,17 @@ export default new VueRouter({
         {path: "/member", component: MemberContainer},
         {path: "/cart", component: CartContainer},
         {path: "/search", component: SearchContainer},
+        
         {path: "/news/list", component: NewsList},
         {path: "/news/detail/:id", component: NewsDetail},
         
         {path: "/pic/list", redirect: "/pic/list/0"},
         {path: "/pic/list/:id", component: PicList},
-        {path: "/pic/detail/:id", component: PicDetail}
+        {path: "/pic/detail/:id", component: PicDetail},
+
+        {path: "/goods/list", component: GoodsList},
+        {path: "/goods/detail/:id", component: GoodsDetail, name: "goodsdetail"},
+        {path: "/goods/desc/:id", component: GoodsDesc},
+        {path: "/goods/comment/:id", component: GoodsComment},
     ]
 })

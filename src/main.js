@@ -29,10 +29,21 @@ import "./filters/datefilter"
 //3. 导入路由配置
 import router from "./router/router"
 
+
+
+//7. 导入vuex
+import Vuex from "vuex"
+Vue.use(Vuex)
+
+// 导入vuex store对象
+
+import store from "./store/store"
+
 //3. 声明一个新的Vue对象
 var vm = new Vue({
     el: "#app",
     router,
+    store,
     render: function(createElement){
         return createElement(App)
     }

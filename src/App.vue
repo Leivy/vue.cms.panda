@@ -2,33 +2,33 @@
     <div class="app">
         <!-- 1. 头部 -->
         <mt-header fixed title="固定在顶部">
-            <router-link to="/" slot="left">
-                <mt-button icon="back">返回</mt-button>
-            </router-link>
+            <!-- <router-link to="/" > -->
+            <mt-button slot="left" icon="back" v-if="$route.path!='/'" @click="$router.go(-1)">返回</mt-button>
+            <!-- </router-link> -->
         </mt-header>
         <!-- 2. router-view -->
         <router-view></router-view>
         <!-- 3. 导航 -->
         <nav class="mui-bar mui-bar-tab">
-            <router-link class="mui-tab-item mui-active" to="/">
+            <a class="mui-tab-item mui-active" @click='goTo("/")'>
                 <span class="mui-icon mui-icon-home"></span>
                 <span class="mui-tab-label">首页</span>
-            </router-link>
-            <router-link class="mui-tab-item" to="/member">
+            </a>
+            <a class="mui-tab-item" @click='goTo("/member")'>
                 <span class="mui-icon mui-icon-contact">
                 </span>
                 <span class="mui-tab-label">会员</span>
-            </router-link>
-            <router-link class="mui-tab-item" to="/cart">
+            </a>
+            <a class="mui-tab-item" @click='goTo("/cart")'>
                 <span class="mui-icon mui-icon-extra mui-icon-extra-cart">
-                    <span class="mui-badge">0</span>
+                    <span class="mui-badge">{{$store.getters.cartsTotalCount}}</span>
                 </span>
                 <span class="mui-tab-label">购物车</span>
-            </router-link>
-            <router-link class="mui-tab-item" to="/search">
+            </a>
+            <a class="mui-tab-item" @click='goTo("/search")'>
                 <span class="mui-icon mui-icon-search"></span>
                 <span class="mui-tab-label">搜索</span>
-            </router-link>
+            </a>
         </nav>
     </div>
 </template>
@@ -40,6 +40,11 @@ export default {
     data() {
         return {
             name: "易俊雄"
+        }
+    },
+    methods:{
+        goTo(route){
+            this.$router.push(route);
         }
     }
 }

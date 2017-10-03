@@ -1,10 +1,7 @@
 <template>
   <div>
-    <mt-swipe :auto="4000">
-      <mt-swipe-item v-for="(item, index) in picList" :key="index">
-        <img :src="apiUrl + item.img" alt="">
-      </mt-swipe-item>
-    </mt-swipe>
+    
+    <swiper :pic-list="picList"></swiper>
 
     <ul class="mui-table-view mui-grid-view mui-grid-9">
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
@@ -29,7 +26,7 @@
         </router-link>
       </li>
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-        <router-link to="/news/list">
+        <router-link to="/goods/list">
           <!-- <span class="mui-icon mui-icon-chatbubble"></span> -->
           <img src="../../images/menu5.png" alt="">
           <div class="mui-media-body">
@@ -73,6 +70,8 @@
 <script>
 import config from "../../config"
 
+import swiper from "../subcomps/swiper.vue"
+
 export default {
   data() {
     return {
@@ -84,38 +83,25 @@ export default {
     this.$http.get(this.apiUrl + "/api/getlunbo").then(function(res) {
       var data = res.body;
       if (data.status == 0) {
+        data.message.forEach(v=>{
+            v.img = this.apiUrl + v.img;
+        })
         this.picList = data.message;
       }
     })
+  },
+  components: {
+    swiper
   }
 }
 </script>
 
 <style scoped>
 
-.mint-swipe {
-  height: 180px;
-}
-
-.mint-swipe .mint-swipe-item:nth-child(1) {
-  background-color: red;
-}
-
-.mint-swipe .mint-swipe-item:nth-child(2) {
-  background-color: green;
-}
-
-.mint-swipe .mint-swipe-item:nth-child(3) {
-  background-color: blue;
-}
-
-.mint-swipe .mint-swipe-item img {
-  width: 100%;
-  height: 180px;
-}
 
 .mui-grid-view.mui-grid-9 {
     background-color: white;
+    border-top: none;
 }
 
 .mui-table-view-cell img{
